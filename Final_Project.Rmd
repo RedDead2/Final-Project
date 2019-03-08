@@ -1,0 +1,23 @@
+---
+title: "Final Project"
+author: "Andrew Baker, Eman Robi, James Lyou, Jamie Marken, Alberto Melendez"
+date: "March 4, 2019"
+output: html_document
+---
+
+```{r Packages, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(sf)
+library(dplyr)
+library(tmap)
+library(leaflet)
+library(ggplot2)
+library(shiny)
+```
+
+```{r data, include=FALSE}
+baseData=read.csv("./ACS_17_5YR_S1301/ACS_17_5YR_S1301_with_ann.csv")
+
+
+```
