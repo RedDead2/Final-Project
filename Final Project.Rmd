@@ -4,3 +4,21 @@ author: "Andrew Baker, Eman Robi, James Lyou, Jamie Marken, Alberto Melendez"
 date: "March 4, 2019"
 output: html_document
 ---
+
+```{r, Extract Data}
+library(tidyverse)
+
+acsdata <- read.csv("ACS_17_5YR_S1301/ACS_17_5YR_S1301_with_ann.csv")
+
+n <- 1
+
+acsdata <- acsdata[-(1:n), , drop = FALSE]
+
+acsdata <- select(acsdata, "HC04_EST_VC04", "HC04_EST_VC21", "HC04_EST_VC20", "HC04_EST_VC24", "GEO.id", "GEO.id2", "GEO.display.label")
+
+acsdata$GEO.id3 <- as.character(acsdata$GEO.id2)
+acsdata$GEO.id3 <- substr(acsdata$GEO.id3, 0, 5)
+
+King <- filter(acsdata, GEO.id3 == '53033') 
+Pierce <- filter(acsdata, GEO.id3 == '53053')
+```
