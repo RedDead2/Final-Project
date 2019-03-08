@@ -7,8 +7,11 @@ output: html_document
 
 ```{r, Extract Data}
 library(tidyverse)
+library(sf)
+library(tmap)
 
 acsdata <- read.csv("ACS_17_5YR_S1301/ACS_17_5YR_S1301_with_ann.csv")
+Kingshp <- st_read("Kingshapefile/2010_Census_Tracts_for_King_County__Conflated_to_Parcels__Major_Waterbodies_Erased__tracts10_shore_area.shp")
 
 n <- 1
 
@@ -21,4 +24,11 @@ acsdata$GEO.id3 <- substr(acsdata$GEO.id3, 0, 5)
 
 King <- filter(acsdata, GEO.id3 == '53033') 
 Pierce <- filter(acsdata, GEO.id3 == '53053')
+
+Kingshp$GEO.id2 = Kingshp$GEO_ID_TRT
+
+Kingshp <- merge(Kingshp, King, by="GEO.id2") 
+
+
+tm_shape(Kingshp) + tm_fill(col="HC04_EST_VC04", title = "Women with births in the past 12 months - Rate per 1,000 women; Estimate; 35 to 50 years") + tm_borders() + tm_layout( aes.palette = list(seq = "-RdYlGn"), title = "King County ", title.position = c("RIGHT", "TOP"))
 ```
