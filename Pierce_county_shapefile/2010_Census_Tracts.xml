@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<pubdate>20110830</pubdate>
+<title>2010_Census_Tracts</title>
+<onlink>http://services2.arcgis.com/1UvBaQ5y1ubjUPmd/arcgis/rest/services/2010_Census_Tracts/FeatureServer</onlink>
+</citeinfo>
+</citation>
+<descript>
+<abstract>2010 Census Tract polygons for all of Pierce County, realigned to Pierce County roads, parcels, hydro, railroads, powerlines, etc. Population figures for race, ethnicity, median age, household size, household count, etc were downloaded from the US Census website and joined to this layer. Please read metadata for additional information.  Any data download constitutes acceptance of the Terms of Use.  </abstract>
+<purpose>2010 Census Tract polygons for all of Pierce County, realigned to Pierce County roads, parcels, etc.  Read the full metadata for more information.</purpose>
+</descript>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>Pierce County</themekey>
+<themekey>Census</themekey>
+<themekey>2010</themekey>
+<themekey>Tracts</themekey>
+<themekey>Washington</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>Access and Use Constraints: Data download constitutes acceptance of the Terms of Use.  All users should read the metadata.</useconst>
+</idinfo>
+<metainfo>
+<metd>20171016</metd>
+<metc>
+<cntinfo>
+<!--no contact person or organization name available-->
+</cntinfo>
+</metc>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>
