@@ -7,6 +7,7 @@ library(tidyverse)
 library(sf)
 library(tmap)
 library(classInt)
+library(leaflet)
 
 # Data and shp
 acsdata <- read.csv("ACS_17_5YR_S1301/ACS_17_5YR_S1301_with_ann.csv")
@@ -31,6 +32,8 @@ Pierceshp$GEO.id2 <- substr(Pierceshp$GEO.id2, 0, 11)
 Kingshp <- merge(Kingshp, King, by="GEO.id2")
 Pierceshp <- merge(Pierceshp, Pierce, by="GEO.id2")
 
+bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
+pal <- colorBin("RdYlGn", domain = Kingshp$HC04_EST_VC01, bins = bins)
 
 shinyServer(function(input, output) {
   output$Counties <- renderPlot({
@@ -56,9 +59,23 @@ shinyServer(function(input, output) {
       map <- Pierceshp 
       name <- "Pierce County"
     }
-    
+
     # King County Map
+    
     tm_shape(map) + tm_fill(col= plot,     
-                            title = Legend_title) + tmap_options(max.categories = 6) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = name, title.position = c("LEFT", "TOP")) 
+                            title = Legend_title) + tmap_options(max.categories = 6) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = name, title.position = c("LEFT", "TOP"))     
   })
 })
+
+
+
+
+leaflet()  %>% addTiles() %>% 
+  setView(lng = -121.9836, lat=47.5480, zoom=9) %>% 
+  addPolygons(data=Kingshp, fillColor = ~pal(as.numeric(Kingshp$HC04_EST_VC01)), weight = 2,
+              opacity = 1,
+              color = "white",
+              dashArray = "3",
+              fillOpacity = 0.7) %>% 
+  addMarkers(lng = 47.7511,lat=-120.7401,popup="Hi there") %>% addLegend(pal = pal, values = Kingshp$HC04_EST_VC01, opacity = 0.7, title = NULL,
+                                                                         position = "bottomright")
