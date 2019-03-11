@@ -32,50 +32,59 @@ Pierceshp$GEO.id2 <- substr(Pierceshp$GEO.id2, 0, 11)
 Kingshp <- merge(Kingshp, King, by="GEO.id2")
 Pierceshp <- merge(Pierceshp, Pierce, by="GEO.id2")
 
-bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
-pal <- colorBin("RdYlGn", domain = Kingshp$HC04_EST_VC01, bins = bins)
+
 
 shinyServer(function(input, output) {
   output$Counties <- renderPlot({
     
     if(input$data == "15 to 50 years") {
-      plot <- "HC04_EST_VC01"
+      selectcol <- "HC04_EST_VC01"
       Legend_title <- "15 to 50 years"
     } else if(input$data == "NATIVITY - Foreign born") {
-      plot <- "HC04_EST_VC21"
+      selectcol <- "HC04_EST_VC21"
       Legend_title <- "NATIVITY - Foreign born"
     } else if (input$data == "NATIVITY - Native") {
-      plot <- "HC04_EST_VC20"
+      selectcol <- "HC04_EST_VC20"
       Legend_title <- "NATIVITY - Native"
     } else {
-      plot <- "HC04_EST_VC24"
+      selectcol <- "HC04_EST_VC24"
       Legend_title <- "EDUCATIONAL ATTAINMENT - Less than high school graduate"
     }
     
     if(input$County == "King County") {
-      map <- Kingshp
+      Shapefile <- Kingshp
       name <- "King County"
+      
     } else {
-      map <- Pierceshp 
+      Shapefile <- Pierceshp 
       name <- "Pierce County"
     }
-
-    # King County Map
     
-    tm_shape(map) + tm_fill(col= plot,     
-                            title = Legend_title) + tmap_options(max.categories = 6) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = name, title.position = c("LEFT", "TOP"))     
-  })
+    if(input$Type == "Static") {
+      style <-  tmap_mode("plot") +
+                    tm_shape(Shapefile) + tm_fill(col= selectcol, title = Legend_title) + tmap_options(max.categories = 6) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = name, title.position = c("LEFT", "TOP")) 
+    } else {
+      style <- output$mymap <- renderLeaflet({
+        dmap <- leaflet()  %>% addTiles() %>% 
+          setView(lng = -121.9836, lat=47.5480, zoom=9) %>% 
+          addPolygons(data=Shapefile, fillColor = ~pal(as.numeric(Shapefile$selectcol)), weight = 2,
+                      opacity = 1,
+                      color = "white",
+                      dashArray = "3",
+                      fillOpacity = 0.7) %>% 
+          addLegend(pal = pal, values = Shapefile$selectcol, opacity = 0.7, title = NULL,
+                    position = "bottomright")
+        
+        
+        dmap
+      })
+  } 
+    # King County Map
+    bins <- c(0, 10, 20, 50, 100, 200, 500, 1000)
+    pal <- colorBin("YlOrRd", domain = Shapefile$selectcol, bins = bins)
+    style
+   
+     
+}) 
 })
 
-
-
-
-leaflet()  %>% addTiles() %>% 
-  setView(lng = -121.9836, lat=47.5480, zoom=9) %>% 
-  addPolygons(data=Kingshp, fillColor = ~pal(as.numeric(Kingshp$HC04_EST_VC01)), weight = 2,
-              opacity = 1,
-              color = "white",
-              dashArray = "3",
-              fillOpacity = 0.7) %>% 
-  addMarkers(lng = 47.7511,lat=-120.7401,popup="Hi there") %>% addLegend(pal = pal, values = Kingshp$HC04_EST_VC01, opacity = 0.7, title = NULL,
-                                                                         position = "bottomright")

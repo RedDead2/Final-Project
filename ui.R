@@ -12,13 +12,16 @@ shinyUI(fluidPage(
     selected = "HC04_EST_VC01"), 
     radioButtons(inputId = "County", label = "Select County:", 
                  choices = c("King County", "Pierce County"), 
-                 selected = "King County")),
+                 selected = "King County"),
+    radioButtons(inputId = "Type", label = "Select Interactive or Static:", 
+                 choices = c("Interactive", "Static"), 
+                 selected = "Static")
+    ),
     # Displays the plot
-    mainPanel(plotOutput("Counties")
+    mainPanel(plotOutput("Counties", width = 400, height = 400), leafletOutput("mymap")
     )
-  )
+    )
 )
 )
-
 
 
