@@ -6,15 +6,17 @@ library(ggplot2)
 library(tidyverse)
 library(sf)
 library(tmap)
+library(classInt)
 
 # Data and shp
 acsdata <- read.csv("ACS_17_5YR_S1301/ACS_17_5YR_S1301_with_ann.csv")
 Kingshp <- st_read("Kingshapefile/2010_Census_Tracts_for_King_County__Conflated_to_Parcels__Major_Waterbodies_Erased__tracts10_shore_area.shp")
 Pierceshp <- st_read("Pierce_county_shapefile/2010_Census_Tracts.shp")
 
+n <- 1 
 acsdata <- acsdata[-(1:n), , drop = FALSE]
 
-acsdata <- select(acsdata, "HC04_EST_VC04", "HC04_EST_VC21", "HC04_EST_VC20", "HC04_EST_VC24", "GEO.id", "GEO.id2", "GEO.display.label")
+acsdata <- select(acsdata, "HC04_EST_VC01", "HC04_EST_VC21", "HC04_EST_VC20", "HC04_EST_VC24", "GEO.id", "GEO.id2", "GEO.display.label")
 
 acsdata$GEO.id3 <- as.character(acsdata$GEO.id2)
 acsdata$GEO.id3 <- substr(acsdata$GEO.id3, 0, 5)
@@ -32,25 +34,31 @@ Pierceshp <- merge(Pierceshp, Pierce, by="GEO.id2")
 
 shinyServer(function(input, output) {
   output$Counties <- renderPlot({
-  
-    if(input$data == "HC04_EST_VC04") {
-      plot <- "HC04_EST_VC04"
-      Legend_title <- "Women with births in the past 12 months - Rate per 1,000 women; Estimate; 35 to 50 years"
-    } else if(input$data == "HC04_EST_VC21") {
+    
+    if(input$data == "15 to 50 years") {
+      plot <- "HC04_EST_VC01"
+      Legend_title <- "15 to 50 years"
+    } else if(input$data == "NATIVITY - Foreign born") {
       plot <- "HC04_EST_VC21"
-      Legend_title <- "Women with births in the past 12 months  - Rate per 1,000 women; Estimate; NATIVITY - Foreign born"
-    } else if (input$data == "HC04_EST_VC20") {
+      Legend_title <- "NATIVITY - Foreign born"
+    } else if (input$data == "NATIVITY - Native") {
       plot <- "HC04_EST_VC20"
-      Legend_title <- "Women with births in the past 12 months  - Rate per 1,000 women; Estimate; NATIVITY - Native"
+      Legend_title <- "NATIVITY - Native"
     } else {
       plot <- "HC04_EST_VC24"
-      Legend_title <- "Women with births in the past 12 months - Rate per 1,000 women; Estimate; EDUCATIONAL ATTAINMENT - Less than high school graduate"
+      Legend_title <- "EDUCATIONAL ATTAINMENT - Less than high school graduate"
+    }
+    
+    if(input$County == "King County") {
+      map <- Kingshp
+      name <- "King County"
+    } else {
+      map <- Pierceshp 
+      name <- "Pierce County"
     }
     
     # King County Map
-    tm_shape(Kingshp) + tm_fill(col= plot, 
-                                breaks = c(0, 20, 40, 60, 80, 100, 120, 140), 
-                                #palette = c("red", "orange", "yellow", "blue", "white", "turquoise"), 
-                                title = Legend_title) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = "King County ", title.position = c("RIGHT", "TOP")) 
+    tm_shape(map) + tm_fill(col= plot,     
+                            title = Legend_title) + tmap_options(max.categories = 6) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = name, title.position = c("LEFT", "TOP")) 
   })
 })
