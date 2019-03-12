@@ -6,4 +6,4 @@ This project focuses on the fertility rate difference between Pierce County and 
 We have
 
 
-Link: http://students.washington.edu/emanr
+Link: https://emanr.shinyapps.io/Final-Project
