@@ -1,4 +1,3 @@
-# Packages 
 library(dplyr)
 library(shiny) 
 library(rsconnect)
@@ -39,15 +38,19 @@ shinyServer(function(input, output) {
     
     if(input$data == "15 to 50 years") {
       selectcol <- "HC04_EST_VC01"
+      fileandcol <- noquote("Shapefile$HC04_EST_VC01")
       Legend_title <- "15 to 50 years"
     } else if(input$data == "NATIVITY - Foreign born") {
       selectcol <- "HC04_EST_VC21"
+      fileandcol <- "Shapefile$HC04_EST_VC21"
       Legend_title <- "NATIVITY - Foreign born"
     } else if (input$data == "NATIVITY - Native") {
       selectcol <- "HC04_EST_VC20"
+      fileandcol <- "Shapefile$HC04_EST_VC20"
       Legend_title <- "NATIVITY - Native"
     } else {
       selectcol <- "HC04_EST_VC24"
+      fileandcol <- "Shapefile$HC04_EST_VC24"
       Legend_title <- "EDUCATIONAL ATTAINMENT - Less than high school graduate"
     }
     
@@ -62,29 +65,30 @@ shinyServer(function(input, output) {
     
     if(input$Type == "Static") {
       style <-  tmap_mode("plot") +
-                    tm_shape(Shapefile) + tm_fill(col= selectcol, title = Legend_title) + tmap_options(max.categories = 6) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = name, title.position = c("LEFT", "TOP")) 
+        tm_shape(Shapefile) + tm_fill(col= selectcol, title = Legend_title) + tmap_options(max.categories = 6) + tm_borders() + tm_layout(aes.palette = list(seq = "-RdYlGn"), title = name, title.position = c("LEFT", "TOP")) 
     } else {
+      
+      pal <- colorBin("YlOrRd", noquote(fileandcol), bins = bins)
       style <- output$mymap <- renderLeaflet({
         dmap <- leaflet()  %>% addTiles() %>% 
-          setView(lng = -121.9836, lat=47.5480, zoom=9) %>% 
-          addPolygons(data=Shapefile, fillColor = ~pal(as.numeric(Shapefile$selectcol)), weight = 2,
+          setView(lng = lng, lat=lat, zoom=9) %>% 
+          addPolygons(data=Shapefile, fillColor = ~pal(as.numeric(noquote(fileandcol))), weight = 2,
                       opacity = 1,
                       color = "white",
                       dashArray = "3",
                       fillOpacity = 0.7) %>% 
-          addLegend(pal = pal, values = Shapefile$selectcol, opacity = 0.7, title = NULL,
+          addLegend(pal = pal, values = selectcol, opacity = 0.7, title = name,
                     position = "bottomright")
         
-        
+         
         dmap
       })
-  } 
+    } 
     # King County Map
     bins <- c(0, 10, 20, 50, 100, 200, 500, 1000)
     pal <- colorBin("YlOrRd", domain = Shapefile$selectcol, bins = bins)
     style
-   
-     
-}) 
+    
+    
+  }) 
 })
-
