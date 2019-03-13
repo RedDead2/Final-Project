@@ -1,0 +1,12 @@
+name: Final-Project
+title: Final-Project
+username:
+account: emanr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 778579
+bundleId: 1929105
+url: https://emanr.shinyapps.io/Final-Project/
+when: 1552250776.02554
+asMultiple: FALSE
+asStatic: FALSE
