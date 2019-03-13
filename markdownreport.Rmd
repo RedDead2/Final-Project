@@ -1,0 +1,37 @@
+---
+title: "Final Project"
+author: "Alberto Melendez, Emmanuel Robi, Jamie Marken, Andrew Baker, and James Lyou"
+date: "3/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[Report](https://github.com/RedDead2/Final-Project/blob/jamie-branch/final_projectreport.pdf)
+[ShinyApp](https://emanr.shinyapps.io/Final-Project/)
+
+##Question
+
+How does educational attainment and age affect birth rates among foreign-born and native-born women in King County and Pierce County, WA?
+
+##Issues with Data
+
+U.S. Census data on birth rates of foreign-born birth rates may be non-representative of the true birth rates among foreign born. This is because many undocumented immigrants are undercounted in the decennial census. So, true totals of foreign-born births would be inflated due to illegal migration. 
+
+##Relevance of the Question
+
+The U.S. Census Bureau provides socioeconomic data on foreign-born versus native-born populations. Findings from the Census Bureau indicate that foreign-born populations earn less, are more impoverished, and have lower educational attainment than native-born populations. These findings may be similar to the socioeconomic characteristics of foreign-born populations in King and Pierce County, WA. A cartographic comparison between foreign-born and native-born women in King and Pierce County would therefore be useful, as it could indicate which populations are in greater need of government assistance or other types of benefits.
+
+##Terms
+
+Native born: The Census Bureau defines native or native born as anyone in the U.S., Puerto Rico, a U.S. Island Area, or of a U.S. citizen parent or parents.
+
+Birth rate: number of live births per 1,000 of population per year
+
+Fertility rate: number of live births per 1,000 women of childbearing age generally ages 15 to 44.
+
+Educational Attainment: defined as the highest grade completed in the educational system within a selected population. In this case, births in the past year per 1,000 women whose educational attainment equals less than a high school diploma.
+ 
+      
