@@ -1,0 +1,84 @@
+---
+title: "Final Project"
+author: "Alberto Melendez, Emmanuel Robi, Jamie Marken, Andrew Baker, and James Lyou"
+date: "3/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+[ShinyApp](https://emanr.shinyapps.io/Final-Project/)   
+
+##Research Question
+
+How does educational attainment and age affect birth rates among foreign-born and native-born women in King County and Pierce County, WA?
+
+##Issues with Data
+
+U.S. Census data on birth rates of foreign-born birth rates may be non-representative of the true birth rates among foreign born. This is because many undocumented immigrants are undercounted in the decennial census. So, true totals of foreign-born births would be inflated due to illegal migration ("Foreign Born").
+
+##Relevance of Research Question
+
+The U.S. Census Bureau provides socioeconomic data on foreign-born versus native-born populations. Findings from the Census Bureau indicate that foreign-born populations earn less, are more impoverished, and have lower educational attainment than native-born populations. These findings may be similar to the socioeconomic characteristics of foreign-born populations in King and Pierce County, WA. A cartographic comparison between foreign-born and native-born women in King and Pierce County would therefore be useful, as it could indicate which populations are in greater need of government assistance or other types of benefits.
+
+The second piece of literature below supports the claim that the birth rates of babies being born to foreign-born women is tied to the highly debated topic of immigration. High birth rates among foreign-born population brings up many negative associations, as some believe that immigrants will "overtake" native populations (Glusker 4).
+
+##Contextualizing the Research Question
+
+Contextualizing the research question conceptually means explaining the importance of measuring birth rates. The birth rate is an important measure as it affects public policy and budgeting for education and healthcare systems. In the public realm, governments, policymakers, and the news media are concerned with birth rates, as birth rates are viewed as being either too high or too low ("Distilled Demographics: The Birth Rate").
+
+-Native born: The Census Bureau defines native or native born as anyone in the U.S., Puerto Rico, a U.S. Island Area, or of a U.S. citizen parent or parents.
+
+-Birth rate: number of live births per 1,000 of population per year
+
+-Fertility rate: number of live births per 1,000 women of childbearing age generally ages 15 to 44 ("National Geographic").
+
+-Educational Attainment: defined as the highest grade completed in the educational system within a selected population. In this case, births in the past year per 1,000 women whose educational attainment equals less than a high school diploma ("United States Census Bureau").
+
+##Literature Review
+
+The literature below from the U.S. Census Bureau provides socioeconomic data on foreign-born versus native-born populations. Findings from the Census Bureau indicate that foreign-born populations earn less, are more impoverished, and have lower educational attainment than native-born populations. These findings may be similar to the socioeconomic characteristics of foreign-born populations in King and Pierce County, WA. A cartographic comparison between foreign-born and native-born women in King and Pierce County would therefore be useful, as it could indicate which populations are in greater need of government assistance or other types of benefits. 
+
+The second piece of literature below supports the claim that the birth rates of babies being born to foreign-born women is tied to the highly debated topic of immigration. High birth rates among foreign-born population brings up many negative associations, as some believe that immigrants will "overtake" native populations (Glusker 4).
+
+According to a study from the Census Bureau, the foreign born earn less than natives. A 'Current Population Survey' from the U.S. Census Bureau revealed that 31.1 percent of foreign-born full-time workers and 17.4 percent of native workers earned less than $20,000 in 2001. Out of the foreign-born workers, the proportions earning less than $20,000 ranged from 47.4 percent of those from Central America to 14.9 percent from Europe and 17.9 percent from Asia. 28.8 percent of native workers earned $50,000 or more compared with 21.3 percent of foreign-born workers (Shmidley 7). 
+
+The foreign born are more likely than natives to live in poverty. In 2001, 16 percent of the foreign-born population lived below the poverty level, compared with 11 percent of natives in the United States. Foreign-born people who were non-citizens were twice as likely to be poor than foreign-born naturalized citizens, as 19.7 percent lived in poverty compared with 9.9 percent of foreign-born naturalized citizens who lived in poverty (Shmidley 7). 
+In addition, educational attainment among foreign-born populations are lower compared to native-born populations. 67.2% of foreign-born populations aged 25 and over were less likely to have graduated high school than natives the same age (86.9 percent). In addition, more than one-fifth of the foreign-born had less than a ninth-grade education, compared to roughly one-twentieth of the native population (Shmidley 4).
+
+Throughout the twentieth century there has been changes in foreign fertility patterns, particularly with recent increases in levels of immigration from countries with high fertility. Birth rates of foreign born compared to native born relates to the topic of immigration, as immigration has been a recurrent topic of popular and political debate, as well as scholarly inquiry. In addition, the debate on immigration often overlaps with fears relating to overpopulation and the changing population composition of the United States. Specifically, In the early twentieth century there were widespread concerns about poor immigrant "quality" and assumptions that high immigrant fertility discouraged fertility among the native-born. These assumptions are very much alive today, as some worry about the immigrant "quality" from Latin American countries (Glusker 1). 
+
+##Methodology
+
+To answer our research question, the following variables were used: Ages 15-50 years, foreign-born, native-born, and educational attainment of less than high school. All variables were women who have given birth within the past 12 months, and the rate is per 1,000 women. 
+
+Shapefiles of King County and Pierce County, WA census tracts were used. The 2010 shapefile of King County census tracts was extracted from the King County GIS Open Data database and the 2010 Pierce County shapefile was taken from the Pierce County open data GIS database.
+
+To isolate columns with data that needed for both counties, the data was aggregated to select the columns matching the variables we needed. Coordinates from the shapefiles were selected as well. Using the selected variables from the American Community Survey and the coordinates from the shapefiles, the static maps and interactive maps were created.
+ 
+'Leaflet' was used to create the interactive maps which were built into an interactive 'Shiny' web app. Widgets for the interactive maps were created so users can easily switch between maps to compare birth rates among women in King County and Pierce County who are 15 to 50 years of age, women who are foreign-born, native-born, and who have less than a high school education. 
+
+##Results
+
+These maps were created to serve strictly as a visual comparison, as choropleth maps do not serve as a way to indicate correlation. 
+
+For fertility rates of women 15 to 50 years of age, the choropleth maps for King County show that the southwest area has higher fertility rates. Regarding educational attainment, higher rates of women in South Seattle and southern King County have given birth in the past year who have less than a high school diploma. For the foreign-born, fertility rates are higher than native-born. Spatially, Bellevue has high fertility as well as Kent and Tukwila. 
+
+Regarding women 15 to 50 years of age in Pierce County, fertility rates are higher in the Lakewood area than the rest of the county. For educational attainment, women who have less than a high school diploma and have had a child in the past year are mostly scattered. However, there are high rates on McNeal Island, Anderson Island, and South Tacoma. Rates among the foreign-born are clustered in downtown Tacoma, Lakewood, Bonney Lake, and census tracts along I-5. Rates among the native-born are concentrated in Eatonville, Fort-Lewis, Dupont, University Place, and Puyallup.
+
+##Works Cited
+
+1. Glusker, Ann I. Fertility Patterns of Native- and Foreign-born Women: Assimilating to Diversity. New Americans (LFB Scholarly Publishing LLC). New York: LFB Scholarly Pub., 2003.
+
+2. National Geographic. "Fertility." https://www.nationalgeographic.org/encyclopedia/fertility/ (Accessed March 8, 2019).
+
+3. PRB. "Distilled Demographics: The Birth Rate." https://www.prb.org/distilleddemographics3/ (Accessed March 8, 2019).
+
+4. Shmidley, Dianne, 2003, The Foreign-Born Population in the United States: March 2002, Current Population Reports, P20-539, U.S. Census Bureau, Washington, D.C.
+ 
+5. United States Census Bureau. "Educational Attainment." https://www.census.gov/topics/education/educational-attainment.html. (Accessed March 8, 2019).
+ 
+      
