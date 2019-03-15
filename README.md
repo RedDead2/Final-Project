@@ -8,4 +8,4 @@ We gathered data from the ACS for fertility rates and shapefile for pierce and k
 we displayed the fertility data at natural jenks because we believed that was the most accurate way to display it.
 
 
-Link: https://emanr.shinyapps.io/Final-Project
+Link: https://students.washington.edu/emanr/Geog458Final/markdownreport.html?fbclid=IwAR1snmsasOIQT8KDSNXqrGEwmaNI1100cnO0eoGdKYaQeBYlDkCJGkzvG30
